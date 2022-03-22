@@ -28,6 +28,8 @@ function load() {
                 states.addObject(new Pyramid(model.rotate, model.translation, model.xScale))
             } else if(model.name == "CUBEOCTAHEDRON") {
                 states.addObject(new CubeOctahedron(model.rotate, model.translation, model.xScale))
+            } else if(model.name == "CUBE") {
+                states.addObject(new Cube(model.rotate, model.translation, model.xScale))
             }
         }
         states.drawAll();
