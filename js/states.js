@@ -29,4 +29,14 @@ class States {
     addObject(object) {
         this.objects.push(object);
     }
+
+    showSelectableObjects() {
+        var select = document.getElementById('object-list')
+        for (let i=0; i<this.objects.length; i++) {
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.innerHTML = this.objects[i].name.toLowerCase();
+            select.appendChild(opt);
+        }
+    }
 }

@@ -12,3 +12,7 @@ states.selectedObj = states.objects[0]
 
 // draw all object
 states.drawAll();
+
+window.onload = function() {
+    states.showSelectableObjects();
+}
