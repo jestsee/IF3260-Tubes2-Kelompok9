@@ -2,7 +2,7 @@
 var states = new States();
 
 // create pyramid object
-var pyramid = new Pyramid()
+var pyramid = new CubeOctahedron();
 
 // add pyramid object to states
 states.addObject(pyramid);

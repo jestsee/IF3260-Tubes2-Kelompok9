@@ -4,6 +4,7 @@
  class CubeOctahedron{
     constructor() {
         this.name = "CUBEOCTAHEDRON"
+        this.center = [80, 60, 80]
         this.position = this.generatePosition()
         this.rotate = [0, 0, 0]
         this.translation = [150, 200, 100]
@@ -236,7 +237,7 @@
      * translasi dan scale
      */
     drawObj() {
-        draw(this.position, this.rotate, this.translation, this.scale)
+        draw(this.position, this.rotate, this.translation, this.scale, this.center)
     }
 
     /**
