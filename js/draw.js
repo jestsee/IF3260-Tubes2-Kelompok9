@@ -6,7 +6,7 @@
  * @param {array} arrTranslation - translation array [x, y, z]
  * @param {array} arrScale - scale array [x, y, z]
  */
-function draw (arrPosition, arrRotate, arrTranslation, arrScale, matrix=null) {
+function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter) {
     // look up where the vertex data needs to go.
     var positionLocation = gl.getAttribLocation(program, "a_position");
     var colorLocation = gl.getAttribLocation(program, "a_color");
@@ -16,7 +16,8 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, matrix=null) {
     var matrixLocation = gl.getUniformLocation(program, "u_matrix");
 
     // default color
-    var arrColor = generateColor(arrPosition.length/6);
+    var arrColor = generateColor(arrPosition.length/(6*18));
+    // console.log(arrColor);
 
     var positionBuffer = gl.createBuffer();
     // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
@@ -34,9 +35,6 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, matrix=null) {
 
     // Tell WebGL how to convert from clip space to pixels
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-
-    // Clear the canvas.
-    gl.clear(gl.COLOR_BUFFER_BIT);
 
     // Turn on culling. By default backfacing triangles
     // will be culled.
@@ -86,15 +84,14 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, matrix=null) {
 
     // Compute the matrices
     var matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 800);
+    
     matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
-    matrix = m4.translate(matrix, 80, 60, 80);
+    matrix = m4.translate(matrix, arrCenter[0], arrCenter[1], arrCenter[2]);
+    matrix = m4.scale(matrix, scale[0], scale[1], scale[2]); // harusnya diakhir
     matrix = m4.xRotate(matrix, rotation[0]);
     matrix = m4.yRotate(matrix, rotation[1]);
     matrix = m4.zRotate(matrix, rotation[2]);
-    matrix = m4.translate(matrix, -80, -60, -80); // sampe sini udah oke
-
-    matrix = m4.scale(matrix, scale[0], scale[1], scale[2]); // scale belum ter-handle
-
+    matrix = m4.translate(matrix, -arrCenter[0], -arrCenter[1], -arrCenter[2]);
     // Set the matrix.
     gl.uniformMatrix4fv(matrixLocation, false, matrix);
 

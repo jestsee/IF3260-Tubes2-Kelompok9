@@ -13,13 +13,22 @@
   <script type="text/javascript" src="../js/draw.js"></script>
   <script type="text/javascript" src="../js/pyramid.js"></script>
   <script type="text/javascript" src="../js/cube.js"></script>
+  <script type="text/javascript" src="../js/cubeoctahedron.js"></script>
   <script type="text/javascript" src="../js/states.js"></script>
   <script type="text/javascript" src="../js/controller.js"></script>
   <script type="text/javascript" src="../js/view.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
 
-  <div class="rotation">
+  <div class="select-save-load">
+    <label for="object-list">Select an object:</label>
+    <select name="object-list" id="object-list" oninput="selectObject()"></select>
 
+    <button class="button" onclick="save()">Save</button>
+    <input type="file" id="myfile" name="myfile" accept="application/JSON">
+    <button type="button" onclick="load()">Load</button>
+  </div>
+
+  <div class="rotation">
     <b>R</b>
     <!-- xslider -->
     <label for="xrotation">X:</label>
@@ -35,45 +44,42 @@
     <label for="zrotation">Z:</label>
     <input type="range" oninput="zRotation()" id="zrotation" min="0" max="360">
     <a id="z-val-rot"></a>
-
   </div>
-  <div class="translation">
 
+  <div class="translation">
     <b>T</b>
     <!-- xslider -->
     <label for="xtranslation">X:</label>
-    <input type="range" oninput="xTranslation()" id="xtranslation" min="-400" max="800">
+    <input type="range" oninput="xTranslation()" id="xtranslation" min="0" max="800">
     <a id="x-val-trans"></a>
 
     <!-- yslider -->
     <label for="yrotation">Y:</label>
-    <input type="range" oninput="yTranslation()" id="ytranslation" min="-400" max="800">
+    <input type="range" oninput="yTranslation()" id="ytranslation" min="0" max="800">
     <a id="y-val-trans"></a>
 
     <!-- yslider -->
     <label for="ztranslation">Z:</label>
-    <input type="range" oninput="zTranslation()" id="ztranslation" min="-400" max="800">
+    <input type="range" oninput="zTranslation()" id="ztranslation" min="0" max="800">
     <a id="z-val-trans"></a>
-
   </div>
-  <div class="scale">
 
+  <div class="scale">
     <b>S</b>
     <!-- xslider -->
     <label for="xscale">X:</label>
-    <input type="range" oninput="xScale()" id="xscale" min="0" max="500">
+    <input type="range" oninput="xScale()" id="xscale" min="-500" max="500">
     <a id="x-val-scale"></a>
 
     <!-- yslider -->
     <label for="yscale">Y:</label>
-    <input type="range" oninput="yScale()" id="yscale" min="0" max="500">
+    <input type="range" oninput="yScale()" id="yscale" min="-500" max="500">
     <a id="y-val-scale"></a>
 
     <!-- yslider -->
     <label for="zscale">Z:</label>
-    <input type="range" oninput="zScale()" id="zscale" min="0" max="500">
+    <input type="range" oninput="zScale()" id="zscale" min="-500" max="500">
     <a id="z-val-scale"></a>
-
   </div>
   <div class="camera">
     <br>
