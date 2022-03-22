@@ -1,9 +1,9 @@
 /**
- * Pyramid class
+ * Cube class
  */
- class Pyramid {
+ class Cube {
     constructor() {
-        this.name = "PYRAMID"
+        this.name = "CUBE"
         this.position = this.generatePosition()
         this.rotate = [0, 0, 0]
         this.translation = [150, 200, 100]
@@ -13,9 +13,11 @@
     /**
      * 
      * @returns {array}
-     * array yang menyimpan semua koordinat untuk pyramid
+     * array yang menyimpan semua koordinat untuk cube
      */
     generatePosition() {
+
+        // Bottom
         var arrPosition = generateBlock(
             0,0,0,
             160,0,0,
@@ -23,44 +25,70 @@
         
         arrPosition.push(...generateBlock(
             0,-8,0,
-            0,128,0,
+            0,160,0,
             8
         ))
         
         arrPosition.push(...generateBlock(
             160,-8,0,
-            160,128,0,
+            160,160,0,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            0,120,0,
-            160,120,0,
+            0,160,0,
+            160,160,0,
             8
         ))
-        
-        
-        arrPosition.push(...generateBlock(
-            80,60,160,
-            0,-8,0,
-            8
-        ))
+
+        // Tiang
         
         arrPosition.push(...generateBlock(
-            80,60,160,
-            160,-8,0,
+            0,0,0,
+            0,0,160,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            80,60,160,
-            0,128,0,
+            160,0,0,
+            160,0,160,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            80,60,160,
-            160,128,0,
+            160,160,0,
+            160,160,160,
+            8
+        ))
+        
+        arrPosition.push(...generateBlock(
+            0,160,0,
+            0,160,160,
+            8
+        ))
+
+        // Above
+        arrPosition.push(...generateBlock(
+            0,0,160,
+            160,0,160,
+            8
+        ))
+        
+        arrPosition.push(...generateBlock(
+            0,160,160,
+            160,160,160,
+            8
+        ))
+        
+        arrPosition.push(...generateBlock(
+            0,0,160,
+            0,160,160,
+            8
+        ))
+        
+        arrPosition.push(...generateBlock(
+            160,0,160,
+            160,160,160,
             8
         ))
 
