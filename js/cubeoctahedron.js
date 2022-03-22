@@ -10,6 +10,7 @@
         this.name = "CUBEOCTAHEDRON";
         this.center = [80, 60, 0];
         this.position = this.generatePosition();
+        this.backupArrPosition = this.position.slice();
         
         (!rotate) ? this.rotate = [90, 0, 0]: this.rotate = rotate;
         (!translation) ? this.translation = [300, 300, 100]: this.translation = translation;

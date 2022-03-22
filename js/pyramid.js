@@ -10,6 +10,7 @@ class Pyramid {
         this.name = "PYRAMID";
         this.center = [80, 60, 160/3];
         this.position = this.generatePosition();
+        this.backupArrPosition = this.position.slice();
         
         (!rotate) ? this.rotate = [90, 0, 0]: this.rotate = rotate;
         (!translation) ? this.translation = [150, 200, 100]: this.translation = translation;
