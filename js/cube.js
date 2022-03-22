@@ -19,76 +19,76 @@
 
         // Bottom
         var arrPosition = generateBlock(
-            0,0,0,
-            160,0,0,
+            480,0,0,
+            320,0,0,
             8);
         
         arrPosition.push(...generateBlock(
-            0,-8,0,
-            0,160,0,
+            320,0,0,
+            320,160,0,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            160,-8,0,
-            160,160,0,
+            480,0,0,
+            480,160,0,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            0,160,0,
-            160,160,0,
+            320,160,0,
+            480,160,0,
             8
         ))
 
         // Tiang
         
         arrPosition.push(...generateBlock(
-            0,0,0,
-            0,0,160,
+            320,0,0,
+            320,0,160,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            160,0,0,
-            160,0,160,
+            480,0,0,
+            480,0,160,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            160,160,0,
-            160,160,160,
+            480,160,0,
+            480,160,160,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            0,160,0,
-            0,160,160,
+            320,160,0,
+            320,160,160,
             8
         ))
 
         // Above
         arrPosition.push(...generateBlock(
-            0,0,160,
-            160,0,160,
+            320,0,160,
+            480,0,160,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            0,160,160,
-            160,160,160,
+            320,160,160,
+            480,160,160,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            0,0,160,
-            0,160,160,
+            320,0,160,
+            320,160,160,
             8
         ))
         
         arrPosition.push(...generateBlock(
-            160,0,160,
-            160,160,160,
+            480,0,160,
+            480,160,160,
             8
         ))
 
@@ -96,7 +96,7 @@
     }
 
     /**
-     * menggambar model pyramid berdasarkan atribut array posisi, rotasi
+     * menggambar model cube berdasarkan atribut array posisi, rotasi
      * translasi dan scale
      */
     drawObj() {
