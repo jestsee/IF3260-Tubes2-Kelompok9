@@ -16,18 +16,21 @@
   <script type="text/javascript" src="../js/states.js"></script>
   <script type="text/javascript" src="../js/controller.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
-  
 
-  <div class="select-obj">
+  <div class="select-save-load">
     <label for="object-list">Select an object:</label>
     <select name="object-list" id="object-list" oninput="selectObject()"></select>
+
+    <button class="button" onclick="save()">Save</button>
+    <input type="file" id="myfile" name="myfile" accept="application/JSON">
+    <button type="button" onclick="load()">Load</button>
   </div>
 
   <div class="rotation">
     <b>R</b>
     <!-- xslider -->
     <label for="xrotation">X:</label>
-    <input type="range" oninput="xRotation()" id="xrotation" value="90" min="0" max="360">
+    <input type="range" oninput="xRotation()" id="xrotation" min="0" max="360">
     <a id="x-val-rot"></a>
 
     <!-- yslider -->

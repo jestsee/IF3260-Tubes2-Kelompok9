@@ -39,4 +39,30 @@ class States {
             select.appendChild(opt);
         }
     }
+
+    saveState() {
+        var toSave = [];
+        for (let i=0; i < this.objects.length; i++) {
+            let object = {
+                "name" : this.objects[i].name,
+                "center" : this.objects[i].center,
+                "position" : this.objects[i].position,
+                "rotate" : this.objects[i].rotate,
+                "translation" : this.objects[i].translation,
+                "scale" : this.objects[i].scale
+            }
+            toSave.push(object)
+        }
+        console.log(JSON.stringify(toSave, null, 4));
+        this.download(JSON.stringify(toSave, null, 4), 'data.json', 'text/plain');
+    }
+
+    download(content, fileName, contentType) {
+        var a = document.createElement("a");
+        var file = new Blob([content], {type: contentType});
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
+
+    }
 }

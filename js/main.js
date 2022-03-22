@@ -17,4 +17,11 @@ states.drawAll();
 
 window.onload = function() {
     states.showSelectableObjects();
+    var currentObj = states.selectedObj;
+    currentObj.setInitialSliderValue();
+
+    // display initial slider value
+    xRotation(); yRotation(); zRotation();
+    xTranslation(); yTranslation(); zTranslation();
+    xScale(); yScale(); zScale();
 }

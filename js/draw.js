@@ -17,7 +17,7 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter) {
 
     // default color
     var arrColor = generateColor(arrPosition.length/(6*18));
-    console.log(arrColor);
+    // console.log(arrColor);
 
     var positionBuffer = gl.createBuffer();
     // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)

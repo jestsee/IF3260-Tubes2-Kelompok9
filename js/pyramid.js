@@ -2,13 +2,18 @@
  * Pyramid class
  */
 class Pyramid {
-    constructor() {
-        this.name = "PYRAMID"
-        this.center = [80, 60, 160/3]
-        this.position = this.generatePosition()
-        this.rotate = [90, 0, 0]
-        this.translation = [150, 200, 100]
-        this.scale = [1,1,1]
+    constructor(
+        rotate = null, 
+        translation = null, 
+        scale = null
+    ) {
+        this.name = "PYRAMID";
+        this.center = [80, 60, 160/3];
+        this.position = this.generatePosition();
+        
+        (!rotate) ? this.rotate = [90, 0, 0]: this.rotate = rotate;
+        (!translation) ? this.translation = [150, 200, 100]: this.translation = translation;
+        (!scale) ? this.scale = [1,1,1]: this.scale = scale;
     }
 
     /**
@@ -114,5 +119,34 @@ class Pyramid {
 
     zScale(n) {
         this.scale[2] = n
+    }
+
+    setInitialSliderValue() {
+        var rx = document.getElementById('xrotation')
+        rx.value = this.rotate[0]
+
+        var ry = document.getElementById('yrotation')
+        ry.value = this.rotate[1]
+
+        var rz = document.getElementById('zrotation')
+        rz.value = this.rotate[2]
+
+        var tx = document.getElementById('xtranslation')
+        tx.value = this.translation[0]
+
+        var ty = document.getElementById('ytranslation')
+        ty.value = this.translation[1]
+
+        var tz = document.getElementById('ztranslation')
+        tz.value = this.translation[2]
+
+        var sx = document.getElementById('xscale')
+        sx.value = this.scale[0]
+
+        var sy = document.getElementById('yscale')
+        sy.value = this.scale[1]
+
+        var sz = document.getElementById('zscale')
+        sz.value = this.scale[2]
     }
 }
