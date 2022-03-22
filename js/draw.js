@@ -6,7 +6,7 @@
  * @param {array} arrTranslation - translation array [x, y, z]
  * @param {array} arrScale - scale array [x, y, z]
  */
-function draw (arrPosition, arrRotate, arrTranslation, arrScale) {
+function draw (arrPosition, arrRotate, arrTranslation, arrScale, matrix=null) {
     // look up where the vertex data needs to go.
     var positionLocation = gl.getAttribLocation(program, "a_position");
     var colorLocation = gl.getAttribLocation(program, "a_color");
@@ -86,12 +86,14 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale) {
 
     // Compute the matrices
     var matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 800);
-    console.log(matrix);
     matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
+    matrix = m4.translate(matrix, 80, 60, 80);
     matrix = m4.xRotate(matrix, rotation[0]);
     matrix = m4.yRotate(matrix, rotation[1]);
     matrix = m4.zRotate(matrix, rotation[2]);
-    matrix = m4.scale(matrix, scale[0], scale[1], scale[2]);
+    matrix = m4.translate(matrix, -80, -60, -80); // sampe sini udah oke
+
+    matrix = m4.scale(matrix, scale[0], scale[1], scale[2]); // scale belum ter-handle
 
     // Set the matrix.
     gl.uniformMatrix4fv(matrixLocation, false, matrix);

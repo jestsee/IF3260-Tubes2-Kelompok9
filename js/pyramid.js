@@ -5,8 +5,8 @@ class Pyramid {
     constructor() {
         this.name = "PYRAMID"
         this.position = this.generatePosition()
-        this.rotate = [40, 25, 325]
-        this.translation = [8, 8, 0]
+        this.rotate = [0, 0, 0]
+        this.translation = [150, 200, 100]
         this.scale = [1,1,1]
     }
 

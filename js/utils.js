@@ -311,31 +311,6 @@ function generateColor(n) {
   
   /*************************************************************/
   
-  function centerRotation(matrix, center, sumbu, value) {
-    // Start with identity matrix
-    // Translate the matrix by -centre of the object
-    var temp = m4.translate(matrix, 8, 8, 0)
-  
-    // // Rotate the matrix by the desired amount
-    // switch (sumbu) {
-    //   case "x":
-    //     temp = m4.xRotate(temp, value)
-    //     console.log("masuk x");
-    //     break;
-    //   case "y":
-    //     temp = m4.yRotate(temp, value)
-    //     break;
-    //   case "z":
-    //     temp = m4.zRotate(temp, value)
-    //     break;
-    // }
-  
-    // // Translate the matrix by centre of the object
-    // temp = m4.translate(matrix, center[0], center[1], center[2])
-  
-    return temp;
-  }
-  
   /**
    * Memodelkan matriks 4 dimensi
    * beserta fungsi-fungsi yang dibutuhkan
