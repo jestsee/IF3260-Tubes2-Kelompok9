@@ -1,11 +1,11 @@
 // create new states
 var states = new States();
 
-// // create pyramid object
-// var pyramid = new Pyramid()
+// create pyramid object
+var pyramid = new Pyramid()
 
-// // add pyramid object to states
-// states.addObject(pyramid);
+// add pyramid object to states
+states.addObject(pyramid);
 
 // create cube object
 var cube = new Cube()

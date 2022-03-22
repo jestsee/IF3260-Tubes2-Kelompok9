@@ -15,6 +15,7 @@
   <script type="text/javascript" src="../js/cube.js"></script>
   <script type="text/javascript" src="../js/states.js"></script>
   <script type="text/javascript" src="../js/controller.js"></script>
+  <script type="text/javascript" src="../js/view.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
 
   <div class="rotation">
@@ -74,5 +75,23 @@
     <a id="z-val-scale"></a>
 
   </div>
+  <div class="camera">
+    <br>
+    <b>Camera</b>
+    <br>
+
+    <label>Angle: &nbsp;</label>
+    <input type="range" oninput="cameraAngle()" id="cameraAngle" min="-400" max="400">
+    <br>
+
+    <label>Zoom: &nbsp;</label>
+    <button oninput="zoomOut()" id="zoomOut">-</button>
+    <button oninput="zoomIn()" id="zoomIn">+</button>
+    <br><br>
+
+    <button id="resetView" oninput="resetView()">Reset View</button>
+  </div>
+  
+
 </body>
 </html>
