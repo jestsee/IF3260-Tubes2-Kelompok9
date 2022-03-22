@@ -2,9 +2,11 @@
 var states = new States();
 
 // create pyramid object
-var pyramid = new CubeOctahedron();
+var pyramid = new Pyramid();
+var cubeOH = new CubeOctahedron();
 
 // add pyramid object to states
+states.addObject(cubeOH);
 states.addObject(pyramid);
 
 // select first object as default selected object

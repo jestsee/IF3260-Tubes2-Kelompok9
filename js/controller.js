@@ -1,5 +1,10 @@
-/* fungsi-fungsi untuk handle rotasi, translasi dan scale */
+function selectObject() {
+    var i = document.getElementById('object-list').value
+    states.selectedObj = states.objects[i]
+    console.log(states.selectedObj.name);
+}
 
+/* fungsi-fungsi untuk handle rotasi, translasi dan scale */
 function xRotation() {
     var slider = document.getElementById("xrotation");
     var val = document.getElementById("x-val-rot");

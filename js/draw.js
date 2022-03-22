@@ -36,9 +36,6 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter) {
     // Tell WebGL how to convert from clip space to pixels
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-    // Clear the canvas.
-    gl.clear(gl.COLOR_BUFFER_BIT);
-
     // Turn on culling. By default backfacing triangles
     // will be culled.
     gl.enable(gl.CULL_FACE);
