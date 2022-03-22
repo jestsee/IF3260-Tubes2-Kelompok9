@@ -22,3 +22,8 @@ window.onload = function() {
     var currentObj = states.selectedObj;
     currentObj.setInitialSliderValue();
 }
+
+// const oblique = document.getElementById("perspectiveOption").value;
+// if (oblique === "oblique") {
+//     document.getElementsByClassName("field").style.display = "block";
+// }

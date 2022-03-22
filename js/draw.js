@@ -6,7 +6,7 @@
  * @param {array} arrTranslation - translation array [x, y, z]
  * @param {array} arrScale - scale array [x, y, z]
  */
-function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter) {
+function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fieldOfView, angleX, angleY) {
     // look up where the vertex data needs to go.
     var positionLocation = gl.getAttribLocation(program, "a_position");
     var colorLocation = gl.getAttribLocation(program, "a_color");
@@ -14,6 +14,7 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter) {
     // lookup uniforms
     // var colorLocation = gl.getUniformLocation(program, "u_color");
     var matrixLocation = gl.getUniformLocation(program, "u_matrix");
+    var projectionMatrix = gl.getUniformLocation(program, "u_projection");
 
     // default color
     var arrColor = generateColor(arrPosition.length/(6*18));
@@ -82,9 +83,19 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter) {
     gl.vertexAttribPointer(
         colorLocation, size, type, normalize, stride, offset);
 
+    var cameraMatrix =  m4.yRotation(degToRad(0));
+    cameraMatrix = m4.translate(cameraMatrix, 0, 0, 400 * 1.5); 
+    var viewMatrix = m4.inverse(cameraMatrix);
+
+    var matrixProjection = m4.identity();
+    var aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+    var zNear = 1;
+    var zFar = 2000;
+
+    matrixProjection = m4.perspective(fieldOfView, aspect, zNear, zFar);
+    
     // Compute the matrices
     var matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 800);
-    
     matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
     matrix = m4.translate(matrix, arrCenter[0], arrCenter[1], arrCenter[2]);
     matrix = m4.scale(matrix, scale[0], scale[1], scale[2]); // harusnya diakhir
@@ -94,6 +105,24 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter) {
     matrix = m4.translate(matrix, -arrCenter[0], -arrCenter[1], -arrCenter[2]);
     // Set the matrix.
     gl.uniformMatrix4fv(matrixLocation, false, matrix);
+    gl.uniformMatrix4fv(projectionMatrix, false, matrixProjection);
+
+
+    const button = document.getElementById("perspectiveOption").value;
+    console.log(button);
+
+    if (button === "perspective") {
+        matrixProjection = m4.perspective(fieldOfView, aspect, zNear, zFar);
+    } else if (button === "orthographic") {
+        matrixProjection = m4.orthographic(matrixProjection, -1, 1, -1, 1, zNear, zFar);
+    } else if (button === "oblique") {
+        matrixProjection = m4.oblique(matrixProjection, -angleX, angleY);
+    }
+    // var viewProjectionMat = m4.multiply(matrixProjection, viewMatrix);
+    gl.uniformMatrix4fv(projectionMatrix, false, matrixProjection);
+    
+    console.log(matrixProjection);
+
 
     // Draw the geometry.
     var primitiveType = gl.TRIANGLES;

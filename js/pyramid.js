@@ -5,14 +5,17 @@ class Pyramid {
     constructor(
         rotate = null, 
         translation = null, 
-        scale = null
+        scale = null,
     ) {
         this.name = "PYRAMID";
         this.center = [80, 60, 160/3];
         this.position = this.generatePosition();
+        this.fieldOfView = degToRad(60);
+        this.angleX = -45;
+        this.angleY = 45; 
         
         (!rotate) ? this.rotate = [90, 0, 0]: this.rotate = rotate;
-        (!translation) ? this.translation = [150, 200, 100]: this.translation = translation;
+        (!translation) ? this.translation = [150, 200, -828]: this.translation = translation;
         (!scale) ? this.scale = [1,1,1]: this.scale = scale;
     }
 
@@ -78,7 +81,7 @@ class Pyramid {
      * translasi dan scale
      */
     drawObj() {
-        draw(this.position, this.rotate, this.translation, this.scale, this.center)
+        draw(this.position, this.rotate, this.translation, this.scale, this.center, this.fieldOfView, this.angleX, this.angleY)
     }
 
     /**
@@ -111,6 +114,18 @@ class Pyramid {
 
     xScale(n) {
         this.scale[0] = n
+    }
+
+    setFov(n) {
+        this.fieldOfView = n
+    }
+
+    setAngleX(n) {
+        this.angleX = n
+    }
+
+    setAngleY(n) {
+        this.angleY = n
     }
 
     yScale(n) {

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/style.css">
   <title>Tubes 2 Grafkom</title>
 </head>
 <body>
@@ -16,70 +17,104 @@
   <script type="text/javascript" src="../js/cubeoctahedron.js"></script>
   <script type="text/javascript" src="../js/states.js"></script>
   <script type="text/javascript" src="../js/controller.js"></script>
+  
+  <div class="tools">
+    <div class="select-save-load">
+      <label for="object-list">Select an object:</label>
+      <select name="object-list" id="object-list" oninput="selectObject()"></select>
+
+      <button class="button" onclick="save()">Save</button>
+      <input type="file" id="myfile" name="myfile" accept="application/JSON">
+      <button type="button" onclick="load()">Load</button>
+    </div>
+
+    <div class="projection">
+      Projection:
+      <select id="perspectiveOption" name="perspectiveOption">
+        <option value="perspective" selected="selected">perspective</option>
+        <option value="orthographic">orthographic</option>
+        <option value="oblique">oblique</option>
+      </select>
+    </div>
+
+    <div class="fov">
+      <label for="fovField">FOV: </label>
+      <input type="range" min="0" max="180"  id="fov" name="fovField" oninput="fov()"><br/>
+    </div>
+
+    <div class="angle">
+      <h3>This angle just for Oblique Projection</h3>
+      <div class="field" >
+        <label for="horizontalField">Horizontal Angle: </label>
+        <input type="range" min="0" max="180"  id="horizon" name="horizontalField" oninput="horizonAngle()"><br/>
+      </div>
+
+      <div class="field">
+        <label for="verticalField">Vertical Angle: </label>
+        <input type="range" min="0" max="180"  id="vertical" name="verticalField" oninput="verticalAngle()"><br/>
+      </div>
+    </div>
+
+    <div class="rotation">
+      <b>Rotation</b>
+      <!-- xslider -->
+      <div class="slide">
+      <label for="xrotation">X:</label>
+      <input type="range" oninput="xRotation()" id="xrotation" min="0" max="360">
+      <a id="x-val-rot"></a>
+
+      <!-- yslider -->
+      <label for="yrotation">Y:</label>
+      <input type="range" oninput="yRotation()" id="yrotation" min="0" max="360">
+      <a id="y-val-rot"></a>
+
+      <!-- yslider -->
+      <label for="zrotation">Z:</label>
+      <input type="range" oninput="zRotation()" id="zrotation" min="0" max="360">
+      <a id="z-val-rot"></a>
+      </div>
+    </div>
+
+    <div class="translation">
+      <b>Translation</b>
+      <!-- xslider -->
+      <div class="slide">
+      <label for="xtranslation">X:</label>
+      <input type="range" oninput="xTranslation()" id="xtranslation" min="-1000" max="1000">
+      <a id="x-val-trans"></a>
+
+      <!-- yslider -->
+      <label for="yrotation">Y:</label>
+      <input type="range" oninput="yTranslation()" id="ytranslation" min="-1000" max="1000">
+      <a id="y-val-trans"></a>
+
+      <!-- yslider -->
+      <label for="ztranslation">Z:</label>
+      <input type="range" oninput="zTranslation()" id="ztranslation" min="-1000" max="1000">
+      <a id="z-val-trans"></a>
+      </div>
+    </div>
+
+    <div class="scale">
+      <b>Scale</b>
+      <!-- xslider -->
+      <div class="slide">
+      <label for="xscale">X:</label>
+      <input type="range" oninput="xScale()" id="xscale" min="-500" max="500">
+      <a id="x-val-scale"></a>
+
+      <!-- yslider -->
+      <label for="yscale">Y:</label>
+      <input type="range" oninput="yScale()" id="yscale" min="-500" max="500">
+      <a id="y-val-scale"></a>
+
+      <!-- yslider -->
+      <label for="zscale">Z:</label>
+      <input type="range" oninput="zScale()" id="zscale" min="-500" max="500">
+      <a id="z-val-scale"></a>
+      </div>
+    </div>
+  </div>
   <script type="text/javascript" src="../js/main.js"></script>
-
-  <div class="select-save-load">
-    <label for="object-list">Select an object:</label>
-    <select name="object-list" id="object-list" oninput="selectObject()"></select>
-
-    <button class="button" onclick="save()">Save</button>
-    <input type="file" id="myfile" name="myfile" accept="application/JSON">
-    <button type="button" onclick="load()">Load</button>
-  </div>
-
-  <div class="rotation">
-    <b>R</b>
-    <!-- xslider -->
-    <label for="xrotation">X:</label>
-    <input type="range" oninput="xRotation()" id="xrotation" min="0" max="360">
-    <a id="x-val-rot"></a>
-
-    <!-- yslider -->
-    <label for="yrotation">Y:</label>
-    <input type="range" oninput="yRotation()" id="yrotation" min="0" max="360">
-    <a id="y-val-rot"></a>
-
-    <!-- yslider -->
-    <label for="zrotation">Z:</label>
-    <input type="range" oninput="zRotation()" id="zrotation" min="0" max="360">
-    <a id="z-val-rot"></a>
-  </div>
-
-  <div class="translation">
-    <b>T</b>
-    <!-- xslider -->
-    <label for="xtranslation">X:</label>
-    <input type="range" oninput="xTranslation()" id="xtranslation" min="0" max="800">
-    <a id="x-val-trans"></a>
-
-    <!-- yslider -->
-    <label for="yrotation">Y:</label>
-    <input type="range" oninput="yTranslation()" id="ytranslation" min="0" max="800">
-    <a id="y-val-trans"></a>
-
-    <!-- yslider -->
-    <label for="ztranslation">Z:</label>
-    <input type="range" oninput="zTranslation()" id="ztranslation" min="0" max="800">
-    <a id="z-val-trans"></a>
-  </div>
-
-  <div class="scale">
-    <b>S</b>
-    <!-- xslider -->
-    <label for="xscale">X:</label>
-    <input type="range" oninput="xScale()" id="xscale" min="-500" max="500">
-    <a id="x-val-scale"></a>
-
-    <!-- yslider -->
-    <label for="yscale">Y:</label>
-    <input type="range" oninput="yScale()" id="yscale" min="-500" max="500">
-    <a id="y-val-scale"></a>
-
-    <!-- yslider -->
-    <label for="zscale">Z:</label>
-    <input type="range" oninput="zScale()" id="zscale" min="-500" max="500">
-    <a id="z-val-scale"></a>
-  </div>
-
 </body>
 </html>

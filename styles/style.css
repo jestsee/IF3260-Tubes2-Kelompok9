@@ -1,0 +1,78 @@
+body {
+    display: flex;
+    
+}
+canvas {
+    border-right: 5px solid black;
+}
+
+.tools {
+    margin: auto;
+    width: auto;
+    padding: 20px;
+}
+
+.select-save-load {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+}
+
+.select-save-load > select {
+    border-radius: 8px;
+    padding: 10px;
+    text-transform: capitalize;
+}
+
+.select-save-load > button{
+    padding: 10px 20px 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 20%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.select-save-load > input {
+    margin-top: 20px;   
+}
+
+.projection {
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.projection > select {
+    border-radius: 8px;
+    padding: 10px;
+    margin-left: 20px;
+    text-transform: capitalize;
+}
+
+.fov {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.field {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.field > input {
+    margin-left: 20px;
+}
+
+.slide {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.angle {
+    border: 1px solid black;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}

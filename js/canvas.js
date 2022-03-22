@@ -1,6 +1,6 @@
 /*** SETUP CANVAS  ***/
 var canvas = document.createElement("canvas");
-canvas.width = 800;
+canvas.width = 1000;
 canvas.height = 800;
 document.body.appendChild(canvas);
 

@@ -49,7 +49,8 @@ class States {
                 "position" : this.objects[i].position,
                 "rotate" : this.objects[i].rotate,
                 "translation" : this.objects[i].translation,
-                "scale" : this.objects[i].scale
+                "scale" : this.objects[i].scale,
+                "fov": this.objects[i].fieldOfView,
             }
             toSave.push(object)
         }

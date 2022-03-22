@@ -62,6 +62,24 @@ function zRotation() {
     states.drawAll()
 }
 
+function fov() {
+    var slider = document.getElementById("fov");
+    states.selectedObj.setFov(degToRad(slider.value));
+    states.drawAll()
+}
+
+function horizonAngle() {
+    var slider = document.getElementById("horizon");
+    states.selectedObj.setAngleX(slider.value);
+    states.drawAll();
+}
+
+function verticalAngle() {
+    var slider = document.getElementById("vertical");
+    states.selectedObj.setAngleY(slider.value);
+    states.drawAll();
+}
+
 function xTranslation() {
     var slider = document.getElementById("xtranslation");
     var val = document.getElementById("x-val-trans");
