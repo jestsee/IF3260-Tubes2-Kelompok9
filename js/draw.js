@@ -126,7 +126,7 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     viewMatrix = m4.yRotate(viewMatrix, 0);
     viewMatrix = m4.zRotate(viewMatrix, 0);
     
-    var matrix = m4.identity();
+    var matrix = m4.identity()
     matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
     matrix = m4.translate(matrix, arrCenter[0], arrCenter[1], arrCenter[2]);
     matrix = m4.scale(matrix, scale[0], scale[1], scale[2]); // harusnya diakhir
@@ -154,9 +154,9 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     if (button === "perspective") {
         matrixProjection = m4.perspective(fieldOfView, aspect, zNear, zFar);
     } else if (button === "orthographic") {
-        matrixProjection = m4.orthographic(matrixProjection, -gl.clientWidth/2, gl.clientWidth/2, -gl.clientHeight/2, gl.clientHeight/2, zNear, zFar);
+        matrixProjection = m4.orthographic(matrixProjection, -gl.canvas.clientWidth/2, gl.canvas.clientWidth/2, -gl.canvas.clientHeight/2, gl.canvas.clientHeight/2, zNear, zFar);
     } else if (button === "oblique") {
-        matrixProjection = m4.oblique(matrixProjection, -angleX, angleY);
+        matrixProjection = m4.oblique(matrixProjection, -angleX, -angleY);
     }
     gl.uniformMatrix4fv(projectionMatrix, false, matrixProjection);
 
