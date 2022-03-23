@@ -39,19 +39,19 @@
 
     <div class="fov">
       <label for="fovField">FOV: </label>
-      <input type="range" min="0" max="180"  id="fov" name="fovField" oninput="fov()"><br/>
+      <input type="range" class="slider" min="0" max="180"  id="fov" name="fovField" oninput="fov()"><br/>
     </div>
 
     <div class="angle">
       <h3>This angle just for Oblique Projection</h3>
       <div class="field" >
         <label for="horizontalField">Horizontal Angle: </label>
-        <input type="range" min="0" max="180"  id="horizon" name="horizontalField" oninput="horizonAngle()"><br/>
+        <input type="range" class="slider" min="0" max="180"  id="horizon" name="horizontalField" oninput="horizonAngle()"><br/>
       </div>
 
       <div class="field">
         <label for="verticalField">Vertical Angle: </label>
-        <input type="range" min="0" max="180"  id="vertical" name="verticalField" oninput="verticalAngle()"><br/>
+        <input type="range" class="slider" min="0" max="180"  id="vertical" name="verticalField" oninput="verticalAngle()"><br/>
       </div>
     </div>
 
@@ -60,17 +60,17 @@
       <!-- xslider -->
       <div class="slide">
       <label for="xrotation">X:</label>
-      <input type="range" oninput="xRotation()" id="xrotation" min="0" max="360">
+      <input type="range" class="slider" oninput="xRotation()" id="xrotation" min="0" max="360">
       <a id="x-val-rot"></a>
 
       <!-- yslider -->
       <label for="yrotation">Y:</label>
-      <input type="range" oninput="yRotation()" id="yrotation" min="0" max="360">
+      <input type="range" class="slider" oninput="yRotation()" id="yrotation" min="0" max="360">
       <a id="y-val-rot"></a>
 
       <!-- yslider -->
       <label for="zrotation">Z:</label>
-      <input type="range" oninput="zRotation()" id="zrotation" min="0" max="360">
+      <input type="range" class="slider" oninput="zRotation()" id="zrotation" min="0" max="360">
       <a id="z-val-rot"></a>
       </div>
     </div>
@@ -80,17 +80,17 @@
       <!-- xslider -->
       <div class="slide">
       <label for="xtranslation">X:</label>
-      <input type="range" oninput="xTranslation()" id="xtranslation" min="-1000" max="1000">
+      <input type="range" class="slider" oninput="xTranslation()" id="xtranslation" min="-1000" max="1000">
       <a id="x-val-trans"></a>
 
       <!-- yslider -->
       <label for="yrotation">Y:</label>
-      <input type="range" oninput="yTranslation()" id="ytranslation" min="-1000" max="1000">
+      <input type="range" class="slider" oninput="yTranslation()" id="ytranslation" min="-1000" max="1000">
       <a id="y-val-trans"></a>
 
       <!-- yslider -->
       <label for="ztranslation">Z:</label>
-      <input type="range" oninput="zTranslation()" id="ztranslation" min="-1000" max="1000">
+      <input type="range" class="slider" oninput="zTranslation()" id="ztranslation" min="-1000" max="1000">
       <a id="z-val-trans"></a>
       </div>
     </div>
@@ -100,17 +100,17 @@
       <!-- xslider -->
       <div class="slide">
       <label for="xscale">X:</label>
-      <input type="range" oninput="xScale()" id="xscale" min="-500" max="500">
+      <input type="range" class="slider" oninput="xScale()" id="xscale" min="-500" max="500">
       <a id="x-val-scale"></a>
 
       <!-- yslider -->
       <label for="yscale">Y:</label>
-      <input type="range" oninput="yScale()" id="yscale" min="-500" max="500">
+      <input type="range" class="slider" oninput="yScale()" id="yscale" min="-500" max="500">
       <a id="y-val-scale"></a>
 
       <!-- yslider -->
       <label for="zscale">Z:</label>
-      <input type="range" oninput="zScale()" id="zscale" min="-500" max="500">
+      <input type="range" class="slider" oninput="zScale()" id="zscale" min="-500" max="500">
       <a id="z-val-scale"></a>
       </div>
     </div>

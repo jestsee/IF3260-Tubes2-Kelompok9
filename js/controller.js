@@ -25,13 +25,16 @@ function load() {
         for(let i=0; i<fileContent.length; i++) {
             model = fileContent[i]
             if(model.name == "PYRAMID") {
-                states.addObject(new Pyramid(model.rotate, model.translation, model.xScale))
+                console.log(model.name);
+                states.addObject(new Pyramid(model.rotate, model.translation, model.scale))
             } else if(model.name == "CUBEOCTAHEDRON") {
-                states.addObject(new CubeOctahedron(model.rotate, model.translation, model.xScale))
+                states.addObject(new CubeOctahedron(model.rotate, model.translation, model.scale))
             } else if(model.name == "CUBE") {
-                states.addObject(new Cube(model.rotate, model.translation, model.xScale))
+                states.addObject(new Cube(model.rotate, model.translation, model.scale))
             }
         }
+        // select object
+        states.selectedObj = states.objects[0]
         states.drawAll();
     };
     reader.readAsText(file);
