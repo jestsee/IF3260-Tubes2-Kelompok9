@@ -6,52 +6,48 @@ function cameraAngle() {
 }
 
 function zoomOut() {
-    // var sliderX = document.getElementById("xscale");
-    // var valX = document.getElementById("x-val-scale");
-    // var sliderY = document.getElementById("yscale");
-    // var valY = document.getElementById("y-val-scale");
-    // var sliderZ = document.getElementById("zscale");
-    // var valZ = document.getElementById("z-val-scale");
-    // valX.innerHTML = sliderX.value/100;
-    // valY.innerHTML = sliderY.value/100;
-    // valZ.innerHTML = sliderZ.value/100;
-    // for (let i=0; i < states.objects.length; i++) {
-    //     console.log(states.objects[i].name);
-    //     sliderX.value *= 1.1
-    //     sliderY.value *= 1.1
-    //     sliderZ.value *= 1.1
-    //     states.objects[i].xScale(sliderX.value/100);
-    //     states.objects[i].yScale(sliderX.value/100);
-    //     states.objects[i].zScale(sliderX.value/100);
-    // }
-    // cameraAngleRadians = multiply(0.9, cameraAngleRadians);
-    // cameraMatrix = multiply(scale(0.9, 0.9, 0.9), cameraMatrix);
-    scaleValue = scaleValue * 0.9;
+    var sliderX = document.getElementById("xscale");
+    var valX = document.getElementById("x-val-scale");
+    var sliderY = document.getElementById("yscale");
+    var valY = document.getElementById("y-val-scale");
+    var sliderZ = document.getElementById("zscale");
+    var valZ = document.getElementById("z-val-scale");
+    valX.innerHTML = sliderX.value/100;
+    valY.innerHTML = sliderY.value/100;
+    valZ.innerHTML = sliderZ.value/100;
+    for (let i=0; i < states.objects.length; i++) {
+        console.log(states.objects[i].name);
+        sliderX.value *= 1.1
+        sliderY.value *= 1.1
+        sliderZ.value *= 1.1
+        states.objects[i].xScale(sliderX.value/100);
+        states.objects[i].yScale(sliderX.value/100);
+        states.objects[i].zScale(sliderX.value/100);
+    }
+    // scaleValue = scaleValue * 0.9;
     states.drawAll();
 }
 
 function zoomIn() {
-    // var sliderX = document.getElementById("xscale");
-    // var valX = document.getElementById("x-val-scale");
-    // var sliderY = document.getElementById("yscale");
-    // var valY = document.getElementById("y-val-scale");
-    // var sliderZ = document.getElementById("zscale");
-    // var valZ = document.getElementById("z-val-scale");
-    // valX.innerHTML = sliderX.value/100;
-    // valY.innerHTML = sliderY.value/100;
-    // valZ.innerHTML = sliderZ.value/100;
-    // for (let i=0; i < states.objects.length; i++) {
-    //     console.log(states.objects[i].name);
-    //     sliderX.value *= 0.9
-    //     sliderY.value *= 0.9
-    //     sliderZ.value *= 0.9
-    //     states.objects[i].xScale(sliderX.value/100);
-    //     states.objects[i].yScale(sliderX.value/100);
-    //     states.objects[i].zScale(sliderX.value/100);
-    // }
-    // cameraAngleRadians = multiply(1.1, cameraAngleRadians);
-    // cameraMatrix = multiply(scale(1.1, 1,1, 1.1), cameraMatrix);
-    scaleValue = scaleValue * 1.1;
+    var sliderX = document.getElementById("xscale");
+    var valX = document.getElementById("x-val-scale");
+    var sliderY = document.getElementById("yscale");
+    var valY = document.getElementById("y-val-scale");
+    var sliderZ = document.getElementById("zscale");
+    var valZ = document.getElementById("z-val-scale");
+    valX.innerHTML = sliderX.value/100;
+    valY.innerHTML = sliderY.value/100;
+    valZ.innerHTML = sliderZ.value/100;
+    for (let i=0; i < states.objects.length; i++) {
+        console.log(states.objects[i].name);
+        sliderX.value *= 0.9
+        sliderY.value *= 0.9
+        sliderZ.value *= 0.9
+        states.objects[i].xScale(sliderX.value/100);
+        states.objects[i].yScale(sliderX.value/100);
+        states.objects[i].zScale(sliderX.value/100);
+    }
+    // scaleValue = scaleValue * 1.1;
     states.drawAll();
 }
 
