@@ -1,4 +1,5 @@
 var cameraAngleRadians = 1;
+var scaleValue = 1;
 /**
  * menggambar objek berdasarkan koordinat
  * arrPosition.length harus kelipatan 6
@@ -84,9 +85,9 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     gl.vertexAttribPointer(
         colorLocation, size, type, normalize, stride, offset);
 
-    var cameraMatrix =  m4.yRotation(degToRad(0));
-    cameraMatrix = m4.translate(cameraMatrix, 0, 0, 400 * 1.5); 
-    var viewMatrix = m4.inverse(cameraMatrix);
+    // var cameraMatrix =  m4.yRotation(degToRad(0));
+    // cameraMatrix = m4.translate(cameraMatrix, 0, 0, 400 * 1.5); 
+    // var viewMatrix = m4.inverse(cameraMatrix);
 
     var matrixProjection = m4.identity();
     var aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
@@ -116,10 +117,11 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     var up = [0, 1, 0];
 
     // Compute the camera's matrix using look at.
-    var cameraMatrix = m4.lookAt(cameraPosition, fPosition, up);
+    cameraMatrix = m4.lookAt(cameraPosition, fPosition, up);
 
     // Make a view matrix from the camera matrix
     var viewMatrix = m4.inverse(cameraMatrix);
+    viewMatrix = m4.multiply(m4.scaling(scaleValue, scaleValue, scaleValue), viewMatrix)
 
     // Compute a view projection matrix
     matrix = m4.multiply(matrix, viewMatrix);
