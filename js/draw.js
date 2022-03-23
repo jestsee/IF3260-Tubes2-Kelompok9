@@ -1,3 +1,4 @@
+var cameraAngleRadians = 1;
 /**
  * menggambar objek berdasarkan koordinat
  * arrPosition.length harus kelipatan 6
@@ -96,6 +97,35 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     
     // Compute the matrices
     var matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 800);
+
+    //======
+    // Use matrix math to compute a position on a circle where
+    // the camera is
+    var radius = 200;
+    var fPosition = [radius, 0, 0];
+    var cameraMatrix = m4.yRotation(cameraAngleRadians);
+    cameraMatrix = m4.translate(cameraMatrix, 0, 0, radius * 1.5);
+
+    // Get the camera's position from the matrix we computed
+    var cameraPosition = [
+      cameraMatrix[12],
+      cameraMatrix[13],
+      cameraMatrix[14],
+    ];
+
+    var up = [0, 1, 0];
+
+    // Compute the camera's matrix using look at.
+    var cameraMatrix = m4.lookAt(cameraPosition, fPosition, up);
+
+    // Make a view matrix from the camera matrix
+    var viewMatrix = m4.inverse(cameraMatrix);
+
+    // Compute a view projection matrix
+    matrix = m4.multiply(matrix, viewMatrix);
+
+    //======
+    
     matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
     matrix = m4.translate(matrix, arrCenter[0], arrCenter[1], arrCenter[2]);
     matrix = m4.scale(matrix, scale[0], scale[1], scale[2]); // harusnya diakhir

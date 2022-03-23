@@ -13,6 +13,7 @@ class Pyramid {
         this.fieldOfView = degToRad(60);
         this.angleX = -45;
         this.angleY = 45; 
+        this.backupArrPosition = this.position.slice();
         
         (!rotate) ? this.rotate = [90, 0, 0]: this.rotate = rotate;
         (!translation) ? this.translation = [150, 200, -828]: this.translation = translation;
