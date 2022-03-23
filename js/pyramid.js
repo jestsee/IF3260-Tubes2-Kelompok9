@@ -49,7 +49,6 @@ class Pyramid {
             8
         ))
         
-        
         arrPosition.push(...generateBlock(
             80,60,160,
             0,-8,0,

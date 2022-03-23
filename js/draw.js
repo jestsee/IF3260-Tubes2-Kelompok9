@@ -8,6 +8,8 @@ var cameraAngleRadians = 1;
  * @param {array} arrScale - scale array [x, y, z]
  */
 function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fieldOfView, angleX, angleY) {
+    
+    console.log("camera angle: ", cameraAngleRadians);
     // look up where the vertex data needs to go.
     var positionLocation = gl.getAttribLocation(program, "a_position");
     var colorLocation = gl.getAttribLocation(program, "a_color");
@@ -86,7 +88,7 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
 
     var cameraMatrix =  m4.yRotation(degToRad(0));
     cameraMatrix = m4.translate(cameraMatrix, 0, 0, 400 * 1.5); 
-    var viewMatrix = m4.inverse(cameraMatrix);
+    // var viewMatrix = m4.inverse(cameraMatrix);
 
     var matrixProjection = m4.identity();
     var aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
@@ -98,7 +100,7 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     // Compute the matrices
     var matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 800);
 
-    //======
+    //====================
     // Use matrix math to compute a position on a circle where
     // the camera is
     var radius = 200;
@@ -122,20 +124,35 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     var viewMatrix = m4.inverse(cameraMatrix);
 
     // Compute a view projection matrix
-    matrix = m4.multiply(matrix, viewMatrix);
+    matrixProjection = m4.multiply(matrixProjection, viewMatrix);
 
-    //======
+    //====================================================
+    var numFs = 3;
+
+    var angle = 2 * Math.PI * 2 / numFs;
+    var x = Math.cos(angle) * radius;
+    var y = Math.sin(angle) * radius;
+
+    // starting with the view projection matrix
+    // compute a matrix for the F
+    matrixProjection = m4.translate(matrixProjection, x, 0, y);
+
+    
+    //================================== RTS
     
     matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
     matrix = m4.translate(matrix, arrCenter[0], arrCenter[1], arrCenter[2]);
-    matrix = m4.scale(matrix, scale[0], scale[1], scale[2]); // harusnya diakhir
+    matrix = m4.scale(matrix, scale[0], scale[1], scale[2]);
     matrix = m4.xRotate(matrix, rotation[0]);
     matrix = m4.yRotate(matrix, rotation[1]);
     matrix = m4.zRotate(matrix, rotation[2]);
     matrix = m4.translate(matrix, -arrCenter[0], -arrCenter[1], -arrCenter[2]);
+
+    //==================================
+    
     // Set the matrix.
     gl.uniformMatrix4fv(matrixLocation, false, matrix);
-    gl.uniformMatrix4fv(projectionMatrix, false, matrixProjection);
+    // gl.uniformMatrix4fv(projectionMatrix, false, matrixProjection);
 
 
     const button = document.getElementById("perspectiveOption").value;
@@ -157,6 +174,6 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     // Draw the geometry.
     var primitiveType = gl.TRIANGLES;
     var offset = 0;
-    var count = arrPosition.length;  // 6 triangles in the 'F', 3 points per triangle
+    var count = arrPosition.length; 
     gl.drawArrays(primitiveType, offset, count);
 }
