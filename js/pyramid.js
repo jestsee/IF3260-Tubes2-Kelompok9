@@ -17,7 +17,7 @@ class Pyramid {
         this.shading = false;
         
         (!rotate) ? this.rotate = [90, 0, 0]: this.rotate = rotate;
-        (!translation) ? this.translation = [150, 200, -828]: this.translation = translation;
+        (!translation) ? this.translation = [-100, 0, -800]: this.translation = translation;
         (!scale) ? this.scale = [1,1,1]: this.scale = scale;
     }
 

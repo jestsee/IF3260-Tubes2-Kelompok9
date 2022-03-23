@@ -18,7 +18,7 @@
         this.shading = false;
         
         (!rotate) ? this.rotate = [90, 0, 0]: this.rotate = rotate;
-        (!translation) ? this.translation = [300, 300, -828]: this.translation = translation;
+        (!translation) ? this.translation = [0, 0, -800]: this.translation = translation;
         (!scale) ? this.scale = [1,1,1]: this.scale = scale;
     }
 

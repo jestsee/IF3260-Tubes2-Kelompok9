@@ -116,7 +116,10 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     gl.enableVertexAttribArray(normalLocation);
 
     var cameraMatrix = m4.identity();
+    var radius = 200;
     cameraMatrix = m4.lookAt(target, center, up);
+    cameraMatrix = m4.yRotation(cameraAngleRadians);
+    cameraMatrix = m4.translate(cameraMatrix, 0, 0, radius * 1.5);
     var viewMatrix = m4.inverse(cameraMatrix);
 
     viewMatrix = m4.xRotate(viewMatrix, 0);
@@ -142,8 +145,6 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     var aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
     var zNear = 1;
     var zFar = 2000;
-
-    matrixProjection = m4.perspective(fieldOfView, aspect, zNear, zFar);
     
     const button = document.getElementById("perspectiveOption").value;
     const shade = document.getElementById("shadingOption").value;
@@ -153,7 +154,7 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     if (button === "perspective") {
         matrixProjection = m4.perspective(fieldOfView, aspect, zNear, zFar);
     } else if (button === "orthographic") {
-        matrixProjection = m4.orthographic(matrixProjection, -1, 1, -1, 1, zNear, zFar);
+        matrixProjection = m4.orthographic(matrixProjection, -gl.clientWidth/2, gl.clientWidth/2, -gl.clientHeight/2, gl.clientHeight/2, zNear, zFar);
     } else if (button === "oblique") {
         matrixProjection = m4.oblique(matrixProjection, -angleX, angleY);
     }
