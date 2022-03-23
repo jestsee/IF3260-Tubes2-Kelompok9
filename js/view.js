@@ -50,25 +50,26 @@ function zoomIn() {
 }
 
 function resetView(){
+    cameraAngleRadians = 1;
     for (let i=0; i < states.objects.length; i++) {
         if (states.objects[i].name == "CUBE") {
             states.objects[i].position = states.objects[i].backupArrPosition;
             states.objects[i].center = [400, 80, 80];
             states.objects[i].rotate = [30, 0, 0];
-            states.objects[i].translation = [150, 200, 100];
+            states.objects[i].translation = [150, 200, -828];
             states.objects[i].scale = [1,1,1];
         } else if (states.objects[i].name == "CUBEOCTAHEDRON") {
             states.objects[i].position = states.objects[i].backupArrPosition;
             states.objects[i].center = [80, 60, 0];
             states.objects[i].rotate = [90, 0, 0];
-            states.objects[i].translation = [300, 300, 100];
+            states.objects[i].translation = [300, 300, -828];
             states.objects[i].scale = [1,1,1];   
         } else if (states.objects[i].name == "PYRAMID") {
             states.objects[i].position = states.objects[i].backupArrPosition;
             states.objects[i].center = [80, 60, 160/3];
             states.objects[i].rotate = [90, 0, 0];
-            states.objects[i].translation = [150, 200, 100];
-            states.objects[i].scale = [1,1,1];   
+            states.objects[i].translation = [150, 200, -828];
+            states.objects[i].scale = [1,1,1];
         }
     }
 
