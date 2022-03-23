@@ -1,9 +1,9 @@
 /* fungsi-fungsi untuk handle camera angle, zoom, dan view */
-// function cameraAngle() {
-//     var sliderZ = document.getElementById("zscale");
-//     var valZ = document.getElementById("z-val-scale");
-//     valZ.innerHTML = sliderZ.value/100;
-// }
+function cameraAngle() {
+    var cameraAngle = document.getElementById("cameraAngle");
+    cameraAngleRadians = degToRad(cameraAngle.value);
+    states.drawAll();
+}
 
 function zoomOut() {
     var sliderX = document.getElementById("xscale");
