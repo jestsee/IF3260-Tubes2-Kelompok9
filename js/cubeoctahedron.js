@@ -15,6 +15,7 @@
         this.angleX = -45;
         this.angleY = 45; 
         this.backupArrPosition = this.position.slice();
+        this.shading = false;
         
         (!rotate) ? this.rotate = [90, 0, 0]: this.rotate = rotate;
         (!translation) ? this.translation = [300, 300, -828]: this.translation = translation;
@@ -247,7 +248,7 @@
      * translasi dan scale
      */
     drawObj() {
-        draw(this.position, this.rotate, this.translation, this.scale, this.center, this.fieldOfView, this.angleX, this.angleY);
+        draw(this.position, this.rotate, this.translation, this.scale, this.center, this.fieldOfView, this.angleX, this.angleY, this.shading);
     }
 
     /**
@@ -280,6 +281,10 @@
 
     setAngleX(n) {
         this.angleX = n
+    }
+
+    setShading(n) {
+        this.shading = n
     }
 
     setAngleY(n) {

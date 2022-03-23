@@ -71,6 +71,12 @@ function fov() {
     states.drawAll()
 }
 
+function shading() {
+    var slider = document.getElementById("shadingOption");
+    states.selectedObj.setShading(slider.value);
+    states.drawAll()
+}
+
 function horizonAngle() {
     var slider = document.getElementById("horizon");
     states.selectedObj.setAngleX(slider.value);

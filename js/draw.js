@@ -1,5 +1,9 @@
 var cameraAngleRadians = 1;
 var scaleValue = 1;
+var target = [0, 0, 20];
+var center = [0, 0, 0];
+var up = [0, 1, 0];
+
 /**
  * menggambar objek berdasarkan koordinat
  * arrPosition.length harus kelipatan 6
@@ -8,15 +12,23 @@ var scaleValue = 1;
  * @param {array} arrTranslation - translation array [x, y, z]
  * @param {array} arrScale - scale array [x, y, z]
  */
-function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fieldOfView, angleX, angleY) {
+
+function turnOnShading() {
+    shading = true;
+}
+
+function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fieldOfView, angleX, angleY, shadingA) {
     // look up where the vertex data needs to go.
     var positionLocation = gl.getAttribLocation(program, "a_position");
     var colorLocation = gl.getAttribLocation(program, "a_color");
+    var normalLocation = gl.getAttribLocation(program, "a_normal");
 
     // lookup uniforms
     // var colorLocation = gl.getUniformLocation(program, "u_color");
     var matrixLocation = gl.getUniformLocation(program, "u_matrix");
     var projectionMatrix = gl.getUniformLocation(program, "u_projection");
+    var normalMatrixLocation = gl.getUniformLocation(program, "u_normal");
+    var shadingBool = gl.getUniformLocation(program, "u_shading");
 
     // default color
     var arrColor = generateColor(arrPosition.length/(6*18));
@@ -34,10 +46,18 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     var scale = arrScale;
     // var color = [Math.random(), Math.random(), Math.random(), 1];
 
+    // Set up the normals for the vertices, so that we can compute lighting.
+    var normalBuffer = this.gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, normalBuffer);
+
     resizeCanvasToDisplaySize(gl.canvas);
 
     // Tell WebGL how to convert from clip space to pixels
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+    var vertexNormals = getVectorNormals(arrPosition);
+    gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(vertexNormals),
+                        this.gl.STATIC_DRAW);
 
     // Turn on culling. By default backfacing triangles
     // will be culled.
@@ -84,10 +104,39 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     var offset = 0;               // start at the beginning of the buffer
     gl.vertexAttribPointer(
         colorLocation, size, type, normalize, stride, offset);
+    
+    var size = 3;                 // 3 components per iteration
+    var type = gl.FLOAT;  // the data is 8bit unsigned values
+    var normalize = false;         // normalize the data (convert from 0-255 to 0-1)
+    var stride = 0;               // 0 = move forward size * sizeof(type) each iteration to get the next position
+    var offset = 0;               // start at the beginning of the buffer
+    gl.bindBuffer(this.gl.ARRAY_BUFFER, normalBuffer);
+    gl.vertexAttribPointer(
+        normalLocation, size, type, normalize, stride, offset);
+    gl.enableVertexAttribArray(normalLocation);
 
-    // var cameraMatrix =  m4.yRotation(degToRad(0));
-    // cameraMatrix = m4.translate(cameraMatrix, 0, 0, 400 * 1.5); 
-    // var viewMatrix = m4.inverse(cameraMatrix);
+    var cameraMatrix = m4.identity();
+    cameraMatrix = m4.lookAt(target, center, up);
+    var viewMatrix = m4.inverse(cameraMatrix);
+
+    viewMatrix = m4.xRotate(viewMatrix, 0);
+    viewMatrix = m4.yRotate(viewMatrix, 0);
+    viewMatrix = m4.zRotate(viewMatrix, 0);
+    
+    var matrix = m4.identity();
+    matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
+    matrix = m4.translate(matrix, arrCenter[0], arrCenter[1], arrCenter[2]);
+    matrix = m4.scale(matrix, scale[0], scale[1], scale[2]); // harusnya diakhir
+    matrix = m4.xRotate(matrix, rotation[0]);
+    matrix = m4.yRotate(matrix, rotation[1]);
+    matrix = m4.zRotate(matrix, rotation[2]);
+    matrix = m4.translate(matrix, -arrCenter[0], -arrCenter[1], -arrCenter[2]);
+    var modelViewMatrix = m4.multiply(viewMatrix, matrix);
+
+    var normalMatrix = m4.inverse(modelViewMatrix);
+        normalMatrix = m4.transpose(normalMatrix);
+
+    console.log(normalMatrix);
 
     var matrixProjection = m4.identity();
     var aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
@@ -96,52 +145,8 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
 
     matrixProjection = m4.perspective(fieldOfView, aspect, zNear, zFar);
     
-    // Compute the matrices
-    var matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 800);
-
-    //======
-    // Use matrix math to compute a position on a circle where
-    // the camera is
-    var radius = 200;
-    var fPosition = [radius, 0, 0];
-    var cameraMatrix = m4.yRotation(cameraAngleRadians);
-    cameraMatrix = m4.translate(cameraMatrix, 0, 0, radius * 1.5);
-    console.log(cameraMatrix);
-
-    // Get the camera's position from the matrix we computed
-    var cameraPosition = [
-      cameraMatrix[12],
-      cameraMatrix[13],
-      cameraMatrix[14],
-    ];
-
-    var up = [0, 1, 0];
-
-    // Compute the camera's matrix using look at.
-    cameraMatrix = m4.lookAt(cameraPosition, fPosition, up);
-
-    // Make a view matrix from the camera matrix
-    var viewMatrix = m4.inverse(cameraMatrix);
-    viewMatrix = m4.multiply(m4.scaling(scaleValue, scaleValue, scaleValue), viewMatrix)
-
-    // Compute a view projection matrix
-    matrix = m4.multiply(matrix, viewMatrix);
-
-    //======
-    
-    matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
-    matrix = m4.translate(matrix, arrCenter[0], arrCenter[1], arrCenter[2]);
-    matrix = m4.scale(matrix, scale[0], scale[1], scale[2]); // harusnya diakhir
-    matrix = m4.xRotate(matrix, rotation[0]);
-    matrix = m4.yRotate(matrix, rotation[1]);
-    matrix = m4.zRotate(matrix, rotation[2]);
-    matrix = m4.translate(matrix, -arrCenter[0], -arrCenter[1], -arrCenter[2]);
-    // Set the matrix.
-    gl.uniformMatrix4fv(matrixLocation, false, matrix);
-    gl.uniformMatrix4fv(projectionMatrix, false, matrixProjection);
-
-
     const button = document.getElementById("perspectiveOption").value;
+    const shade = document.getElementById("shadingOption").value;
     console.log(button);
 
     if (button === "perspective") {
@@ -151,10 +156,20 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     } else if (button === "oblique") {
         matrixProjection = m4.oblique(matrixProjection, -angleX, angleY);
     }
+
+    if (shade === "true") {
+        shadingA = true;
+    } else {
+        shadingA = false;
+    }
     // var viewProjectionMat = m4.multiply(matrixProjection, viewMatrix);
+    gl.uniformMatrix4fv(matrixLocation, false, modelViewMatrix);
     gl.uniformMatrix4fv(projectionMatrix, false, matrixProjection);
+    gl.uniformMatrix4fv(normalMatrixLocation, false, normalMatrix);
+    gl.uniform1i(shadingBool, shadingA);
     
-    console.log(matrixProjection);
+    // console.log(matrixProjection);
+    // console.log(shade);
 
 
     // Draw the geometry.
@@ -163,3 +178,22 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     var count = arrPosition.length;  // 6 triangles in the 'F', 3 points per triangle
     gl.drawArrays(primitiveType, offset, count);
 }
+
+function getVectorNormals(vPosition) {
+    const n = vPosition.length;
+    var vNormals = [];
+    for (let i = 0; i < n; i += 12){
+      const p1 = [vPosition[i], vPosition[i+1], vPosition[i+2]];
+      const p2 = [vPosition[i+3], vPosition[i+4], vPosition[i+5]];
+      const p3 = [vPosition[i+6], vPosition[i+7], vPosition[i+8]];
+      const vec1 = subtractVectors(p2, p1);
+      const vec2 = subtractVectors(p3, p1);
+      const normalDirection = cross(vec1, vec2);
+      const vecNormal  = normalize(normalDirection);
+      for (let j = 0; j < 4; j++){
+        vNormals = vNormals.concat(vecNormal);
+      }
+    }
+    return vNormals;
+  }
+  

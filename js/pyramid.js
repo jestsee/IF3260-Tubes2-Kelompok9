@@ -14,6 +14,7 @@ class Pyramid {
         this.angleX = -45;
         this.angleY = 45; 
         this.backupArrPosition = this.position.slice();
+        this.shading = false;
         
         (!rotate) ? this.rotate = [90, 0, 0]: this.rotate = rotate;
         (!translation) ? this.translation = [150, 200, -828]: this.translation = translation;
@@ -82,7 +83,7 @@ class Pyramid {
      * translasi dan scale
      */
     drawObj() {
-        draw(this.position, this.rotate, this.translation, this.scale, this.center, this.fieldOfView, this.angleX, this.angleY)
+        draw(this.position, this.rotate, this.translation, this.scale, this.center, this.fieldOfView, this.angleX, this.angleY, this.shading)
     }
 
     /**
@@ -119,6 +120,10 @@ class Pyramid {
 
     setFov(n) {
         this.fieldOfView = n
+    }
+
+    setShading(n) {
+        this.shading = n
     }
 
     setAngleX(n) {
