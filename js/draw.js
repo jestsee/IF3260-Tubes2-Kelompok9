@@ -149,6 +149,7 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     const shade = document.getElementById("shadingOption").value;
     console.log(button);
 
+
     if (button === "perspective") {
         matrixProjection = m4.perspective(fieldOfView, aspect, zNear, zFar);
     } else if (button === "orthographic") {
@@ -156,6 +157,7 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     } else if (button === "oblique") {
         matrixProjection = m4.oblique(matrixProjection, -angleX, angleY);
     }
+    gl.uniformMatrix4fv(projectionMatrix, false, matrixProjection);
 
     if (shade === "true") {
         shadingA = true;
