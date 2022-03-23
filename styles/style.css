@@ -115,3 +115,16 @@ canvas {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.help-button {
+    margin-top: 10px;
+}
+
+/* .help-content {
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: justify;
+    text-justify: inter-word;
+} */
