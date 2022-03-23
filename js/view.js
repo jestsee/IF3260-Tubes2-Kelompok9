@@ -57,6 +57,7 @@ function zoomIn() {
 
 function resetView(){
     cameraAngleRadians = 1;
+    scaleValue = 1;
     for (let i=0; i < states.objects.length; i++) {
         if (states.objects[i].name == "CUBE") {
             states.objects[i].position = states.objects[i].backupArrPosition;

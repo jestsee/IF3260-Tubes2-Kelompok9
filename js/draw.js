@@ -106,6 +106,7 @@ function draw (arrPosition, arrRotate, arrTranslation, arrScale, arrCenter, fiel
     var fPosition = [radius, 0, 0];
     var cameraMatrix = m4.yRotation(cameraAngleRadians);
     cameraMatrix = m4.translate(cameraMatrix, 0, 0, radius * 1.5);
+    console.log(cameraMatrix);
 
     // Get the camera's position from the matrix we computed
     var cameraPosition = [
