@@ -20,6 +20,7 @@
   <script type="text/javascript" src="../js/view.js"></script>
   
   <div class="tools">
+    <button class="help-button" id="help-button" onclick="location.href='help.html'">Help</button>
     <div class="select-save-load">
       <label for="object-list">Select an object:</label>
       <select name="object-list" id="object-list" oninput="selectObject()"></select>
@@ -27,6 +28,23 @@
       <button class="button" onclick="save()">Save</button>
       <input type="file" id="myfile" name="myfile" accept="application/JSON">
       <button type="button" onclick="load()">Load</button>
+    </div>
+
+    <div class="camera">
+      <br>
+      <b>Camera</b>
+      <br>
+  
+      <label>Angle: &nbsp;</label>
+      <input type="range" oninput="cameraAngle()" id="cameraAngle" min="-180" max="180">
+      <br>
+  
+      <label>Zoom: &nbsp;</label>
+      <button onclick="zoomOut()" id="zoomOut">+</button>
+      <button onclick="zoomIn()" id="zoomIn">-</button>
+      <br><br>
+  
+      <button id="resetView" onclick="resetView()">Reset View</button>
     </div>
 
     <div class="projection">
@@ -115,24 +133,8 @@
       <a id="z-val-scale"></a>
       </div>
     </div>
-  </div>
 
-  <div class="camera">
-    <br>
-    <b>Camera</b>
-    <br>
-
-    <label>Angle: &nbsp;</label>
-    <input type="range" oninput="cameraAngle()" id="cameraAngle" min="-180" max="180">
-    <br>
-
-    <label>Zoom: &nbsp;</label>
-    <button onclick="zoomOut()" id="zoomOut">+</button>
-    <button onclick="zoomIn()" id="zoomIn">-</button>
-    <br><br>
-
-    <button id="resetView" onclick="resetView()">Reset View</button>
-  </div>
+</div>
   <script type="text/javascript" src="../js/main.js"> </script>
 
 </body>
